@@ -1,14 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
-import {ToastContainer} from "react-toastify";
+import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import Routes from './routes';
 import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
-    return (
-        <>
-            <ToastContainer draggable={false} autoClose={4000}/>
-        </>
-    );
-}
+const App = function () {
+  return (
+    <div className='app-container'>
+      <Routes />
+      <ToastContainer draggable={false} autoClose={4000} />
+    </div>
+  );
+};
 
 export default App;
