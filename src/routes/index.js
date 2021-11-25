@@ -30,9 +30,6 @@ const AppRoutes = function () {
       <Route path='/' exact>
         <GitCloneRepos />
       </Route>
-      <Route path='/profile'>
-        <h1>Profile</h1>
-      </Route>
       <Redirect to='/' />
     </Router>
 
