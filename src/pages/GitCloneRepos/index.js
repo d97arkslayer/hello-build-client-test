@@ -65,10 +65,10 @@ const GitCloneRepos = function () {
         }}
       >
         <UserCard user={user} />
-        <Favorites favorites={favorites} />
+        <Favorites favorites={favorites} setFavorites={setFavorites} />
       </div>
       <div
-        className='col-md-10 col-sm-12'
+        className='col-md-4 col-sm-6 col-lg-9'
         name='my_repositories'
       >
         {/* eslint-disable-next-line max-len */}

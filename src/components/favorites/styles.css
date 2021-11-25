@@ -1,11 +1,13 @@
-.favorites-h3{
+.favorites-h3 {
     color: #0D6EFD;
 }
 
 .favorites-scroll {
-    height: 49vh;
-    overflow-y: scroll;
+    height: 44vh;
+    overflow: hidden;
+    overflow-y: auto;
 }
+
 .favorites-list {
     border: 1px solid var(--primary);
     border-radius: 20px;

@@ -13,13 +13,13 @@
 
 .repositories-scroll {
     height: 70vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .repositories-h1 {
     color: #0D6EFD;
 }
 
-.favorite{
+.favorite {
     margin-right: 10px;
 }
