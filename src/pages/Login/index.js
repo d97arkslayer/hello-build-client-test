@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { post } from '../../utils/HttpRequests';
-import { localStorageKeys } from '../../utils/Consts';
+import { localStorageKeys, apiUrls } from '../../utils/Consts';
 import useLocalStorage from '../../hooks/UseLocalStorage';
 import { useGitCloneState } from '../../contexts/GitCloneStateContext';
 import './styles.css';
@@ -16,7 +16,7 @@ const LoginPage = function () {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await post(`${process.env.REACT_APP_AUTH_API_URL}/api/users/login`, {
+    const response = await post(apiUrls.login, {
       email,
       password,
     }, translation);

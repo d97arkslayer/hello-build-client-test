@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { Button, Form } from 'react-bootstrap';
 import { post } from '../../utils/HttpRequests';
 import useLocalStorage from '../../hooks/UseLocalStorage';
-import { localStorageKeys } from '../../utils/Consts';
+import { localStorageKeys, apiUrls } from '../../utils/Consts';
 import { useGitCloneState } from '../../contexts/GitCloneStateContext';
 import './styles.css';
 
@@ -19,7 +19,7 @@ const SignUpPage = function () {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await post(`${process.env.REACT_APP_AUTH_API_URL}/api/users`, {
+    const response = await post(apiUrls.signUp, {
       name,
       lastname,
       email,

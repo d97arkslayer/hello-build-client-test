@@ -10,3 +10,12 @@ export const localStorageKeys = {
   gitAuth: 'git-auth',
   authToken: 'auth-jwt-token',
 };
+
+export const apiUrls = {
+  login: `${process.env.REACT_APP_AUTH_API_URL}/api/users/login`,
+  signUp: `${process.env.REACT_APP_AUTH_API_URL}/api/users`,
+  getFavorites: `${process.env.REACT_APP_AUTH_API_URL}/api/users/favorites`,
+  addFavorite: `${process.env.REACT_APP_AUTH_API_URL}/api/users/favorites`,
+  deleteFavorite: `${process.env.REACT_APP_AUTH_API_URL}/api/users/favorites`,
+
+};

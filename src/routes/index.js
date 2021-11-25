@@ -1,17 +1,19 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Route, Redirect,
+} from 'react-router-dom';
 import useLocalStorage from '../hooks/UseLocalStorage';
 import { localStorageKeys } from '../utils/Consts';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import NavBar from '../components/Nav';
+import GitCloneRepos from '../pages/GitCloneRepos';
 
 const AppRoutes = function () {
   const [isAuthenticated] = useLocalStorage(localStorageKeys.auth, null);
-  console.log(isAuthenticated);
   if (!isAuthenticated) {
     return (
-      <Switch>
+      <Router>
         <Route path='/' exact>
           <Login />
         </Route>
@@ -19,20 +21,20 @@ const AppRoutes = function () {
           <SignUp />
         </Route>
         <Redirect to='/' />
-      </Switch>
+      </Router>
     );
   }
   return (
-    <Switch>
+    <Router>
       <NavBar />
       <Route path='/' exact>
-        <h1>Dashboard</h1>
+        <GitCloneRepos />
       </Route>
       <Route path='/profile'>
         <h1>Profile</h1>
       </Route>
       <Redirect to='/' />
-    </Switch>
+    </Router>
 
   );
 };

@@ -4,13 +4,13 @@ import {
 } from 'react-bootstrap';
 import { ImGithub } from 'react-icons/im';
 import { Link } from 'react-router-dom';
-import { localStorageKeys } from '../../utils/Consts';
+import { gitClonePrefix, localStorageKeys } from '../../utils/Consts';
 import './styles.css';
 
 const GitCloneNavBar = function () {
   const signOut = () => {
-    localStorage.removeItem(localStorageKeys.auth);
-    localStorage.removeItem(localStorageKeys.authToken);
+    localStorage.removeItem(`${gitClonePrefix}${localStorageKeys.auth}`);
+    localStorage.removeItem(`${gitClonePrefix}${localStorageKeys.authToken}`);
     window.location = '/';
   };
 
@@ -18,7 +18,12 @@ const GitCloneNavBar = function () {
     <div className='nav-bar-container'>
       <Navbar variant='dark' bg='primary' className='navbar'>
         <Container className='col-md-8 col-sm-4 col-xl-12 col-lg-12'>
-          <Navbar.Brand as={Link} to='/' className='custom-nav-brand' style={{ fontSize: '20px', height: '50px' }}>
+          <Navbar.Brand
+            as={Link}
+            to='/'
+            className='custom-nav-brand'
+            style={{ fontSize: '20px', height: '50px' }}
+          >
             <ImGithub style={{ marginRight: '10px', marginBottom: '5px' }} />
             GitClone Repositories
           </Navbar.Brand>
@@ -29,7 +34,7 @@ const GitCloneNavBar = function () {
             <Nav.Link as={Link} to='/favorites' style={{ marginRight: '15px' }}>
               Favorites
             </Nav.Link>
-            <Button variant='secondary' onClick={() => signOut()}>
+            <Button variant='secondary' onClick={() => signOut()} style={{ marginRight: '50px' }}>
               Sign Out!
             </Button>
           </Nav>
