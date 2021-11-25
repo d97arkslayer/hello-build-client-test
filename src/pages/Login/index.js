@@ -2,21 +2,34 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { post } from '../../utils/HttpRequests';
+import { localStorageKeys } from '../../utils/Consts';
+import useLocalStorage from '../../hooks/UseLocalStorage';
+import { useGitCloneState } from '../../contexts/GitCloneStateContext';
 import './styles.css';
 
 const LoginPage = function () {
+  const { translation } = useGitCloneState();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [users] = useLocalStorage(localStorageKeys.users, []);
+  const [, setAuth] = useLocalStorage(localStorageKeys.auth, null);
+  const [, setAuthtoken] = useLocalStorage(localStorageKeys.authToken, null);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await post(`${process.env.REACT_APP_AUTH_API_URL}/api/users/login`, { email, password });
+    const response = await post(`${process.env.REACT_APP_AUTH_API_URL}/api/users/login`, {
+      email,
+      password,
+    }, translation);
     if (response.error) {
       return;
     }
     const { user = null, token = null } = response;
     if (user) {
-      localStorage.setItem('auth_token', token);
+      localStorage.removeItem(localStorageKeys.authToken);
+      setAuth(user);
+      setAuthtoken(token);
+      localStorage.removeItem(localStorageKeys.gitAuth);
       // window.location = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`;
     }
   };
@@ -27,7 +40,7 @@ const LoginPage = function () {
       id='login-container'
     >
       <Form
-        className='card p-5 col-md-4 col-sm-12'
+        className='card p-5 col-md-4 col-sm-12 card-container-login'
         style={{ color: 'black', maxWidth: '500px' }}
         bg='dark'
         onSubmit={(e) => onSubmit(e)}

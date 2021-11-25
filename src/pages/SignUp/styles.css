@@ -1,3 +1,7 @@
-.signup-container{
-    height: 100%;
+.signup-container {
+    height: 95%;
+}
+
+.card-container-signup {
+    margin-top: 5vh;
 }

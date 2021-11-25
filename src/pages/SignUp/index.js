@@ -3,13 +3,18 @@ import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Form } from 'react-bootstrap';
 import { post } from '../../utils/HttpRequests';
+import useLocalStorage from '../../hooks/UseLocalStorage';
+import { localStorageKeys } from '../../utils/Consts';
+import { useGitCloneState } from '../../contexts/GitCloneStateContext';
 import './styles.css';
 
 const SignUpPage = function () {
+  const { translation } = useGitCloneState();
   const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [users, setUsers] = useLocalStorage(localStorageKeys.users, []);
   const history = useHistory();
 
   const onSubmit = async (e) => {
@@ -19,18 +24,21 @@ const SignUpPage = function () {
       lastname,
       email,
       password,
-    });
+    }, translation);
     if (response.error) {
       return;
     }
-    toast('Signed Up successful', { type: 'success' });
+    await setUsers([...users, {
+      name, lastname, email, password,
+    }]);
+    toast(response.message, { type: 'success' });
     history.push('/');
   };
 
   return (
     <div className='signup-container d-flex flex-row justify-content-center align-items-center'>
       <Form
-        className='card p-5 col-md-4 col-sm-12'
+        className='card p-5 col-md-4 col-sm-12 card-container-signup'
         style={{ color: 'black', maxWidth: '500px' }}
         bg='dark'
         onSubmit={(e) => onSubmit(e)}
