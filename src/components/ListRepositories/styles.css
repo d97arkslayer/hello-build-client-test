@@ -1,0 +1,25 @@
+.repositories-list {
+    font-size: 17px;
+    border: 1px solid var(--primary);
+    border-radius: 20px;
+    padding: 30px 40px;
+    width: 98%;
+}
+
+.repositories-container {
+    padding-left: 10%;
+    width: fit-content;
+}
+
+.repositories-scroll {
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+.repositories-h1 {
+    color: #0D6EFD;
+}
+
+.favorite{
+    margin-right: 10px;
+}

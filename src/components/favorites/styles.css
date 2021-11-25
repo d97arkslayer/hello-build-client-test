@@ -1,0 +1,15 @@
+.favorites-h3{
+    color: #0D6EFD;
+}
+
+.favorites-scroll {
+    height: 49vh;
+    overflow-y: scroll;
+}
+.favorites-list {
+    border: 1px solid var(--primary);
+    border-radius: 20px;
+    padding: 30px 40px;
+    width: 98%;
+}
+

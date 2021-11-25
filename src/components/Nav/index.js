@@ -29,12 +29,6 @@ const GitCloneNavBar = function () {
             GitClone Repositories
           </Navbar.Brand>
           <Nav className=''>
-            <Nav.Link as={Link} to='/profile' style={{ marginRight: '15px' }}>
-              Profile
-            </Nav.Link>
-            <Nav.Link as={Link} to='/favorites' style={{ marginRight: '15px' }}>
-              Favorites
-            </Nav.Link>
             <Button variant='secondary' onClick={() => signOut()} style={{ marginRight: '50px' }}>
               Sign Out!
             </Button>

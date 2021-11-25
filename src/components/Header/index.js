@@ -3,7 +3,7 @@ import { Dropdown } from 'react-bootstrap';
 import { useGitCloneState } from '../../contexts/GitCloneStateContext';
 import './styles.css';
 
-const Footer = function () {
+const Header = function () {
   const { translation, setTranslation } = useGitCloneState();
   return (
     <div className='footer-translation'>
@@ -20,4 +20,4 @@ const Footer = function () {
   );
 };
 
-export default Footer;
+export default Header;

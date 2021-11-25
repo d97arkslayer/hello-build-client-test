@@ -1,5 +1,5 @@
 export const gitClonePrefix = 'git-clone-';
-export const lang = 'es';
+export const lang = 'en';
 
 export const localStorageKeys = {
   prefixUsers: `${gitClonePrefix}users`,
