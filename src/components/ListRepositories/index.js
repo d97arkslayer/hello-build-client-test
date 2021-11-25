@@ -1,10 +1,11 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
+import { toast } from 'react-toastify';
 
 const GET_REPOSITORIES = gql`
  query repoQuery($after: String) {
     viewer {
-      repositories(first: 3, after: $after) {
+      repositories(first: 100, after: $after) {
         totalCount
         pageInfo {
           endCursor
@@ -25,41 +26,20 @@ const GET_REPOSITORIES = gql`
 
 const ListRepositories = function () {
   const {
-    loading, error, data, fetchMore,
+    loading, error, data,
   } = useQuery(GET_REPOSITORIES, {
     variables: { after: null },
   });
-  const observer = useRef();
-  const lastRepositoryRef = useCallback((node) => {
-    if (loading || !data.viewer.repositories.pageInfo.hasNextPage) {
-      return;
-    }
-    if (observer.current) {
-      observer.current.disconnect();
-    }
-    observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        fetchMore({
-          variables: { after: data.viewer.repositories.pageInfo.endCursor },
-          updateQuery: ((previousQueryResult, options) => {
-            options.fetchMoreResult.viewer.repositories.nodes = [
-              ...previousQueryResult.viewer.repositories.nodes,
-              ...options.fetchMoreResult.viewer.repositories.nodes,
-            ];
-            return options.fetchMoreResult;
-          }),
-        });
-      }
-    }, { threshold: 1.0 });
-    if (node) {
-      observer.current.observe(node);
-    }
-  }, [loading, fetchMore, data]);
-
+  const [loadingGraph, setLoadingGraph] = useState(false);
   if (loading) {
+    if (!loadingGraph) {
+      toast('Loading', { type: 'info', autoClose: 500 });
+      setLoadingGraph(true);
+    }
     return 'Loading...';
   }
   if (error) {
+    toast(`Error: ${error.message}`, { type: 'error', autoClose: 5000 });
     return `Error: ${error.message}`;
   }
 
@@ -68,7 +48,7 @@ const ListRepositories = function () {
     <div>
       {repositories.map((repository, index) => (
         // eslint-disable-next-line react/no-array-index-key
-        <div key={index} ref={index === repositories.length - 1 ? lastRepositoryRef : null}>
+        <div key={index}>
           <div className='d-flex flex-row justify-content-between'>
             <div>{repository.name}</div>
             <div>
