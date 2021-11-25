@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import Routes from './routes';
 import 'react-toastify/dist/ReactToastify.css';
 import { GitCloneStateProvider } from './contexts/GitCloneStateContext';
-import Footer from './components/Footer';
+import Footer from './components/Header';
 
 const App = function () {
   return (

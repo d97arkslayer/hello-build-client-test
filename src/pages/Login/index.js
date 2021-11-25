@@ -11,7 +11,6 @@ const LoginPage = function () {
   const { translation } = useGitCloneState();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [users] = useLocalStorage(localStorageKeys.users, []);
   const [, setAuth] = useLocalStorage(localStorageKeys.auth, null);
   const [, setAuthtoken] = useLocalStorage(localStorageKeys.authToken, null);
 
@@ -30,7 +29,7 @@ const LoginPage = function () {
       setAuth(user);
       setAuthtoken(token);
       localStorage.removeItem(localStorageKeys.gitAuth);
-      // window.location = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`;
+      window.location = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`;
     }
   };
 

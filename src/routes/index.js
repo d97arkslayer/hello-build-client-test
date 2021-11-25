@@ -4,6 +4,7 @@ import useLocalStorage from '../hooks/UseLocalStorage';
 import { localStorageKeys } from '../utils/Consts';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
+import NavBar from '../components/Nav';
 
 const AppRoutes = function () {
   const [isAuthenticated] = useLocalStorage(localStorageKeys.auth, null);
@@ -23,6 +24,7 @@ const AppRoutes = function () {
   }
   return (
     <Switch>
+      <NavBar />
       <Route path='/' exact>
         <h1>Dashboard</h1>
       </Route>
