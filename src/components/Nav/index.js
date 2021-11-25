@@ -11,6 +11,7 @@ const GitCloneNavBar = function () {
   const signOut = () => {
     localStorage.removeItem(`${gitClonePrefix}${localStorageKeys.auth}`);
     localStorage.removeItem(`${gitClonePrefix}${localStorageKeys.authToken}`);
+    localStorage.removeItem(`${gitClonePrefix}${localStorageKeys.gitAuth}`);
     window.location = '/';
   };
 

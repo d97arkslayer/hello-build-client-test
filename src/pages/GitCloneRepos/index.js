@@ -3,11 +3,13 @@ import { useLocation } from 'react-router-dom';
 import useLocalStorage from '../../hooks/UseLocalStorage';
 import { localStorageKeys } from '../../utils/Consts';
 import UserCard from '../../components/UserCard';
+import ListRepositories from '../../components/ListRepositories';
 
 const GitCloneRepos = function () {
   const [user] = useLocalStorage(localStorageKeys.auth);
+  const [token] = useLocalStorage(localStorageKeys.authToken);
   const [gitAccessToken, setGitAccessToken] = useLocalStorage(localStorageKeys.gitAuth);
-  const [favorites, setFavories] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [gitCode, setGitCode] = useState(null);
   const queryParams = new URLSearchParams(useLocation().search);
   const code = queryParams.get('code');
@@ -49,6 +51,7 @@ const GitCloneRepos = function () {
           maxHeight: 'calc(100vh - 180px)',
         }}
       />
+      {gitAccessToken && <ListRepositories />}
     </div>
   );
 };
